@@ -1,0 +1,16 @@
+HTTP status codes
+
+200 OK: Request has succeeded
+
+400 Bad Request: Request could not be understood by server due to malformed syntax. Client should not repeat the request without modifications.
+
+401 Unauthorized: Requires user authentication. The client may repeat the request with a suitable Auth field. If the request included authorization credentials, 401 response indicates that authorization has been refused by those credentials.
+
+404 Not Found: Browser was able to communicate with the server, but the server could not find what was requested.
+
+408 Request timeout: Request that you sent to the server took longer than the server was prepared to wait.
+
+409 Conflict: The request could not be completed due to a conflict with the current state of the resource.
+
+410 Gone: The requested resource is no longer available at the server and no forwarding address is known.
+
