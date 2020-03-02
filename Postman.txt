@@ -4,6 +4,7 @@ Postman is an API client used to develop, test, share and document API's.
 Create a new Collection and label it. Create a new request and save it in the Collection. Go the the saved request and enter a request URL. Choose the option GET and use a URL https://reqres.in/api/users/2 and hit send! 
 The API will be observed at the Body in the Workspace. 
 
+
 2. How to create Collection
 Collection is a group of API requests where multiple API's can be stored and run in a logical arrangements. With Collections you can share, run and monitor multiple requests periodically.
 
@@ -13,10 +14,12 @@ Click on create new Collection--> Go to options--> Add Folder--> To add a new re
 To run a Collection with multiple requests
 Save multiple requests in a folder within the Collection-->Click on run-->Run the folder
 
+
 3. How to create variables
 At the Collection level: Go to options under Collection--> Edit-->Go to Variables--> Create a variable under "Key" and assign it a value existing in the request--> Go to request and replace the value with {{variable name}}
 
 At the Environment (To create variables globally): Go to Environment--> Edit global variables--> Create variables at the global level 
+
 
 4. How to get and set variables in scripting
 
@@ -30,16 +33,18 @@ pm.variables.set("name","Postman");	//To set a new variable
 let Name=pm.variables.get("name");      //To get a new variable
 console.log('The name is '+Name);
 
-pm.globals.set("Global", "New Variable");	
-let globalVar=pm.globals.get("Global");
+pm.globals.set("Global", "New Variable");	//To set a new global variable
+let globalVar=pm.globals.get("Global");   //To get a new global variable
 console.log(globalVar);
 
-pm.environment.set("Environment", "TokenEnvironment");
-let envVar=pm.environment.get("Environment");
+pm.environment.set("Environment", "TokenEnvironment");  //To set a new environment
+let envVar=pm.environment.get("Environment");     ////To get a new environment
 console.log(envVar);
+
 
 5. How to create an Environment
 At the Environment level: Click on Manage Environment--> Add-->Name the Environment --> Create a variable under "Key" and assign it a value existing in the request--> Go to request and replace the value with {{variable name}}
+
 
 6. How to POST a request
 Take a sample API for posting a raw JSON body to it: https://reqres.in/api/register--> Under 'Body' paste the JSON code that has to be posted for eg. {
@@ -49,11 +54,14 @@ Take a sample API for posting a raw JSON body to it: https://reqres.in/api/regis
 
 Under Header--> Body, the token will be generated.
 
+
 7. How to use Script SNIPPETS
 Go to any GET request-->Tests--> Click on any SNIPPETS which contain the code-->Run and observe the status in the Test Results below.
 
+
 8. How to create and manage Workspaces
 Workspace is an area where you can group, organize, and manage your collections
+
 
 9. Data Driven Testing- How to use csv and JSON data files
 Take a sample API for posting a raw JSON body to it: https://reqres.in/api/register--> Under 'Body' paste the JSON code that has to be posted for eg. {
@@ -85,6 +93,39 @@ Run this script to get the same output.
 To import a csv file: Create multiple values under the key "endpoint", "email", "password" in a csv file--> Save the file and run the collection-->In Select File, import the csv file and run.
 
 To import a JSON file: Create a JSON script and save it in .json--> Validate the JSON-->Save the file and run the collection-->In Select File, import the .json file and run.
+
+
+10. How to get a value in Response and refer the same in Request
+Create a GET request and add a request URL: For eg, https://reqres.in/api/users?page=2  --> and click send --> Observe the output at the body
+
+Create a PUT request on another tab and add a request URL: https://reqres.in/api/users/2
+Add this in the Body: {
+    "name": "morpheus",
+    "job": "zion resident"
+}
+
+Create a new environment and add Key variables named "Username" and "Number"and add any random initial value to it--> Update the Body of the PUT request to this:
+{
+    "name":"{{Username}}",
+    "job": "{{Number}}"
+}
+
+Go to the Tests of the GET request and put this script and Save:
+
+body=JSON.parse(responseBody)
+value=body.data[0].first_name
+console.log(value)
+pm.environment.set("Username", value);
+
+number=body.data[0].id
+pm.environment.set("Number", number+1);
+console.log(number+1)
+
+Conclusion: The value of the Username and Number at the GET request should be reflected in the results of the PUT request.
+
+
+
+
 
 
 
