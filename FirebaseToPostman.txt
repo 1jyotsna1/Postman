@@ -1,0 +1,16 @@
+POST https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={API_KEY}
+
+In the Body you should send the following JSON string:
+
+{"email":"{YOUR_EMAIL_ADDRESS}","password":"{PASSWORD}","returnSecureToken":true}
+Content type is application/json (will be set automatically in Postman). You can find the Firebase API_KEY in the Firebase project settings (it's the Web-API-key).
+
+As response you will get a JSON object and the idToken is the token you need for all your API requests as Bearer token.
+
+To have a automated setting of this token, you can add the following code in the Tests tab at your auth request:
+
+var jsonData = JSON.parse(responseBody);
+postman.setGlobalVariable("id_token", jsonData.idToken);
+For all your API requests you should set the Authorization to Bearer Token and the value for the token is {{id_token}}.
+
+Now the token will be automatically used once you executed the auth request and got the response.
