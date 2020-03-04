@@ -121,12 +121,31 @@ number=body.data[0].id
 pm.environment.set("Number", number+1);
 console.log(number+1)
 
+Use http://jsonpathfinder.com/  to get syntax of a path of a variable to be found.
+
 Conclusion: The value of the Username and Number at the GET request should be reflected in the results of the PUT request.
 
+11. How to run from Command line
+Check if node.js is already installed
+	node -v
+	npm -v
+Install node.js
+	Check if node and npm are installed
+Install newman
+	npm install -g newman
+Export collection as a json file
+	Go to the options of the Collection-->Export-->Save the JSON file in a location
+	On command prompt, head to the location where the file is located and run the command: newman run "JSONfile"
 
+newman run -h (will provide all options of running different commands with newman)
+	
+TO RUN ONLY A SPECIFIC FOLDER IN NEWMAN
+newman run "JSON file" --f "Folder name"
 
+TO RUN AN ENVIRONMENT VIA NEWMAN
+newman run "JSON file" -e "Environment"
 
-
-
+TO APPEND DATA TO AN EXISTING COLLECTION VIA NEWMAN
+newman run "JSON file" -e "Environment" -d "File"
 
 
